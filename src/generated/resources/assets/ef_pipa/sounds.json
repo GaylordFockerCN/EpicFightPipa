@@ -1,0 +1,12 @@
+{
+  "sonic_boom": {
+    "sounds": [
+      "ef_pipa:_1",
+      "ef_pipa:_2",
+      "ef_pipa:_3",
+      "ef_pipa:_4",
+      "ef_pipa:_5"
+    ],
+    "subtitle": "subtitles.ef_pipa.sonic_boom"
+  }
+}
