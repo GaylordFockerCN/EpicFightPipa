@@ -1,6 +1,7 @@
 package com.p1nero.pipa;
 
 import com.mojang.logging.LogUtils;
+import com.p1nero.pipa.epicfight.skill.PiPaSkills;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
@@ -32,6 +33,14 @@ public class EpicFightPiPa {
             return super.isCorrectToolForDrops(blockIn);
         }
     });
+
+    public static final RegistryObject<Item> HQ = ITEMS.register("hq", ()->new WeaponItem(Tiers.WOOD, 30, -3F, new Item.Properties().rarity(Rarity.RARE).stacksTo(1).defaultDurability(256)) {
+        @Override
+        public boolean isCorrectToolForDrops(BlockState blockIn) {
+            return super.isCorrectToolForDrops(blockIn);
+        }
+    });
+
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, EpicFightPiPa.MOD_ID);
     public static final RegistryObject<SoundEvent> SONIC_BOOM = SOUNDS.register("sonic_boom", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(EpicFightPiPa.MOD_ID, "sonic_boom")));
     public EpicFightPiPa() {
@@ -45,7 +54,8 @@ public class EpicFightPiPa {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event){
         if (event.getTab() == EpicFightCreativeTabs.ITEMS.get()){
-            event.accept(PIPA.get());
+//            event.accept(PIPA.get());
+            event.accept(HQ.get());
         }
     }
 
