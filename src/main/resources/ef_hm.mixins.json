@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.p1nero.hm.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "ef_hm.mixin-refmap.json",
+  "minVersion": "0.8",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "priority": 1
+}
