@@ -13,6 +13,8 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, EpicFightHM.MOD_ID);
     public static final RegistryObject<EntityType<RainCutterSwordEntity>> SWORD = register("sword",
             EntityType.Builder.of(RainCutterSwordEntity::new, MobCategory.CREATURE));
+    public static final RegistryObject<EntityType<FakeBiped>> FAKE = register("fake",
+            EntityType.Builder.of(FakeBiped::new, MobCategory.CREATURE));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
         return ENTITIES.register(registryname, () -> entityTypeBuilder.build(new ResourceLocation(EpicFightHM.MOD_ID, registryname).toString()));

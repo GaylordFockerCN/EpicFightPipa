@@ -8,9 +8,11 @@
   "refmap": "ef_hm.mixin-refmap.json",
   "minVersion": "0.8",
   "mixins": [
+    "BasicMultiAttackAnimationMixin",
     "WeaponCapabilityMixin"
   ],
   "client": [
+    "RenderEngineMixin"
   ],
   "priority": 1
 }

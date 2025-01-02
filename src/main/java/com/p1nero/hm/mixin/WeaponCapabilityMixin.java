@@ -11,6 +11,8 @@ import yesman.epicfight.world.capabilities.item.WeaponCapability;
 public class WeaponCapabilityMixin {
     @Inject(method = "shouldCancelCombo", at = @At("HEAD"), cancellable = true)
     private void inject(LivingEntityPatch<?> entitypatch, CallbackInfoReturnable<Boolean> cir){
-        cir.setReturnValue(false);
+        if(!entitypatch.getOriginal().getMainHandItem().getItem().getDescriptionId().contains("cdmoveset")){
+            cir.setReturnValue(false);
+        }
     }
 }

@@ -1,11 +1,17 @@
 package com.p1nero.hm;
 
 import com.mojang.logging.LogUtils;
+import com.p1nero.hm.entity.FakeBiped;
 import com.p1nero.hm.entity.ModEntities;
+import com.p1nero.hm.entity.client.FakeBipedRenderer;
 import com.p1nero.hm.entity.client.SwordEntityRenderer;
+import com.p1nero.hm.item.client.RenderZWZJ;
+import net.mcreator.hm.init.HmModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
@@ -14,6 +20,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -25,6 +33,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 import yesman.epicfight.client.particle.TrailParticle;
 import yesman.epicfight.world.item.EpicFightCreativeTabs;
 import yesman.epicfight.world.item.WeaponItem;
@@ -59,6 +68,8 @@ public class EpicFightHM {
         ModEntities.ENTITIES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::setAttributes);
+//        MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
@@ -69,12 +80,34 @@ public class EpicFightHM {
         }
     }
 
+    private void setAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.FAKE.get(), Zombie.createAttributes().build());
+    }
+
+    private void onLivingDeath(LivingDeathEvent event) {
+        LivingEntity ordinal = event.getEntity();
+        FakeBiped fakeBiped = ModEntities.FAKE.get().create(ordinal.level());
+        if(fakeBiped != null){
+            fakeBiped.setOrdinalId(ordinal.getId());
+            fakeBiped.setPos(ordinal.position());
+            ordinal.level().addFreshEntity(fakeBiped);
+            fakeBiped.setHealth(0);
+        }
+    }
+
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents{
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event){
             EntityRenderers.register(ModEntities.SWORD.get(), SwordEntityRenderer::new);
+            EntityRenderers.register(ModEntities.FAKE.get(), FakeBipedRenderer::new);
         }
+
+        @SubscribeEvent
+        public static void onRenderItem(final PatchedRenderersEvent.Add event) {
+            event.addItemRenderer(HmModItems.ALFZ.get(), new RenderZWZJ());
+        }
+
     }
 
 
