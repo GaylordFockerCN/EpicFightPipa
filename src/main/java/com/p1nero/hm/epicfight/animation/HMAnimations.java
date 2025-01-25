@@ -27,9 +27,21 @@ public class HMAnimations {
     public static StaticAnimation IDLE3;
     public static StaticAnimation WALK;
     public static StaticAnimation RUN;
+    public static StaticAnimation C2_IDLE;
+    public static StaticAnimation C2_AUTO1;
+    public static StaticAnimation C2_AUTO2;
     public static StaticAnimation WSFH_AUTO1;
     public static StaticAnimation WSFH_AUTO2;
     public static StaticAnimation WSFH_AUTO3;
+    public static StaticAnimation ELYSIA_ORIGIN_IDLE;
+    public static StaticAnimation ELYSIA_ORIGIN_SKILL;
+    public static StaticAnimation ELYSIA_ORIGIN_WALK;
+    public static StaticAnimation ELYSIA_ORIGIN_WALK_BEGIN;
+    public static StaticAnimation ELYSIA_ORIGIN_WALK_END;
+    public static StaticAnimation ELYSIA_ORIGIN_AUTO1;
+    public static StaticAnimation ELYSIA_ORIGIN_AUTO2;
+    public static StaticAnimation ELYSIA_ORIGIN_AUTO3;
+    public static StaticAnimation ELYSIA_ORIGIN_AUTO4;
 
 
     @SubscribeEvent
@@ -92,7 +104,19 @@ public class HMAnimations {
 
         RUN = new MovementAnimation(true, "biped/zwzj/run", biped);
 
-        WSFH_AUTO1 = new ActionAnimation(0.15F, 1.4F, "biped/wsfh/wsfh_auto1", biped)
+        C2_IDLE = new StaticAnimation(true, "biped/zwzj/elysia_c2_idle", biped);
+
+        C2_AUTO1 = new ActionAnimation(0.15F, 0.75F, "biped/zwzj/elysia_c2_auto1", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 2.5F))
+                .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER, ((dynamicAnimation, livingEntityPatch, v, v1, v2) -> 1.0F));
+
+        C2_AUTO2 = new ActionAnimation(0.15F, 2.5F, "biped/zwzj/elysia_c2_auto2", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 5.33F))
+                .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER, ((dynamicAnimation, livingEntityPatch, v, v1, v2) -> 1.0F));
+
+        WSFH_AUTO1 = new ActionAnimation(0.15F, 1.4F, "biped/zwzj/wsfh_auto1", biped)
                 .newTimePair(0.0F, 1.4F)
                 .addStateRemoveOld(EntityState.TURNING_LOCKED, false)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(1.2F, SHOOT, AnimationEvent.Side.SERVER))
@@ -108,6 +132,40 @@ public class HMAnimations {
                 .newTimePair(0.0F, 3.7F)
                 .addStateRemoveOld(EntityState.TURNING_LOCKED, false)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(1.0F, SHOOT, AnimationEvent.Side.SERVER));
+
+        ELYSIA_ORIGIN_IDLE = new StaticAnimation(true, "biped/zwzj/elysia_origin_idle", biped);
+        ELYSIA_ORIGIN_WALK = new StaticAnimation(true, "biped/zwzj/elysia_origin_walk", biped);
+        ELYSIA_ORIGIN_WALK_BEGIN = new ActionAnimation(0.15F, "biped/zwzj/elysia_origin_walkbegin", biped)
+                .newTimePair(0.0F, Float.MAX_VALUE)
+                .addStateRemoveOld(EntityState.MOVEMENT_LOCKED, false)
+                .addEvents(AnimationProperty.StaticAnimationProperty.ON_END_EVENTS,
+                        (AnimationEvent.create(((livingEntityPatch, staticAnimation, objects) -> livingEntityPatch.reserveAnimation(ELYSIA_ORIGIN_WALK)), AnimationEvent.Side.SERVER)));
+        ELYSIA_ORIGIN_WALK_END = new ActionAnimation(0.15F, "biped/zwzj/elysia_origin_walkend", biped);
+
+        ELYSIA_ORIGIN_AUTO1 = new ActionAnimation(0.15F, 1.08F, "biped/zwzj/elysia_origin_auto1", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 4.033F));
+//                .newTimePair(1.08F, 1.66F)
+//                .addStateRemoveOld(EntityState.CAN_BASIC_ATTACK, true);
+        ELYSIA_ORIGIN_AUTO2 = new ActionAnimation(0.15F, 2.5F, "biped/zwzj/elysia_origin_auto2", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 5.333F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true);
+//                .newTimePair(2.50F, 3.33F)
+//                .addStateRemoveOld(EntityState.CAN_BASIC_ATTACK, true);
+        ELYSIA_ORIGIN_AUTO3 = new ActionAnimation(0.15F, 2.5F, "biped/zwzj/elysia_origin_auto3", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 4.667F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true);
+//                .newTimePair(2.50F, 3.0F)
+//                .addStateRemoveOld(EntityState.CAN_BASIC_ATTACK, true);
+        ELYSIA_ORIGIN_AUTO4 = new ActionAnimation(0.15F, 1.05F, "biped/zwzj/elysia_origin_auto4", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 1.05F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
+                .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER, ((dynamicAnimation, livingEntityPatch, v, v1, v2) -> 0.66F));
+
+        ELYSIA_ORIGIN_SKILL = new ActionAnimation(0.15F, 0.8F, "biped/zwzj/elysia_origin_skill", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 0.8F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true);
+
     }
 
 }

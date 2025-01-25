@@ -19,9 +19,7 @@ public class SwordEntityRenderer extends EntityRenderer<RainCutterSwordEntity> {
     }
 
     /**
-     * 调用物品渲染方法，渲染实体绑定的物品。
-     * 原理是拦截渲染实体的一些参数，然后用于渲染物品。
-     * 调整姿势和找参数调了好久
+     * 调用物品渲染方法，渲染实体绑定的物品
      */
     @Override
     public void render(@NotNull RainCutterSwordEntity entity, float p_114486_, float p_114487_, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int light) {

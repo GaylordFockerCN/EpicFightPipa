@@ -5,6 +5,7 @@ import com.p1nero.hm.entity.FakeBiped;
 import com.p1nero.hm.entity.ModEntities;
 import com.p1nero.hm.entity.client.FakeBipedRenderer;
 import com.p1nero.hm.entity.client.SwordEntityRenderer;
+import com.p1nero.hm.epicfight.skill.HMDataKeys;
 import com.p1nero.hm.item.client.RenderZWZJ;
 import net.mcreator.hm.init.HmModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -34,11 +34,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
-import yesman.epicfight.client.particle.TrailParticle;
 import yesman.epicfight.world.item.EpicFightCreativeTabs;
 import yesman.epicfight.world.item.WeaponItem;
-
-import static net.minecraftforge.eventbus.api.EventPriority.LOWEST;
 
 @Mod(EpicFightHM.MOD_ID)
 public class EpicFightHM {
@@ -66,6 +63,7 @@ public class EpicFightHM {
         ITEMS.register(modEventBus);
         SOUNDS.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
+        HMDataKeys.DATA_KEYS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::setAttributes);

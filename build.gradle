@@ -20,6 +20,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
     mappings channel: mapping_channel, version: mapping_version
     copyIdeResources = true
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         // applies to all the run configs below
         configureEach {
@@ -72,7 +73,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf('libs:WeaponsOfMiracles:20.1.8.5.6')
-    implementation fg.deobf("libs:EpicFight:20.9.2")
+    implementation fg.deobf("libs:EpicFight:20.9.6")
     implementation fg.deobf("libs:hm-1.0.0-forge:1.20.1")
 }
 

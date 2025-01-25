@@ -2,6 +2,7 @@ package com.p1nero.hm.epicfight.weapon;
 
 import com.p1nero.hm.EpicFightHM;
 import com.p1nero.hm.epicfight.animation.HMAnimations;
+import com.p1nero.hm.epicfight.skill.HMSkills;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
@@ -55,17 +56,21 @@ public class HMWeaponCapabilityPresets {
                     .canBePlacedOffhand(false)
                     .newStyleCombo(
                             CapabilityItem.Styles.ONE_HAND,
-                            HMAnimations.WSFH_AUTO1,
-                            HMAnimations.WSFH_AUTO2,
-                            HMAnimations.WSFH_AUTO3,
-//                            Animations.SWORD_AUTO1,
-                            Animations.GREATSWORD_DASH,
-                            Animations.LONGSWORD_AIR_SLASH)
-                    .innateSkill(CapabilityItem.Styles.ONE_HAND, (itemstack) -> EpicFightSkills.SWEEPING_EDGE)
-                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.IDLE, HMAnimations.IDLE1)
-                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.WALK, HMAnimations.WALK)
-                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.RUN, HMAnimations.RUN)
-                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.CHASE, HMAnimations.RUN)
+                            HMAnimations.ELYSIA_ORIGIN_SKILL,
+                            HMAnimations.ELYSIA_ORIGIN_AUTO2,
+                            HMAnimations.ELYSIA_ORIGIN_AUTO3,
+                            HMAnimations.ELYSIA_ORIGIN_AUTO4,
+                            HMAnimations.ELYSIA_ORIGIN_AUTO1,
+                            HMAnimations.ELYSIA_ORIGIN_AUTO1)
+                    .innateSkill(CapabilityItem.Styles.ONE_HAND, (itemstack) -> HMSkills.ELYSIA_ORIGIN)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.IDLE, HMAnimations.ELYSIA_ORIGIN_IDLE)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.WALK, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.RUN, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.SWIM, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.FALL, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.FLOAT, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.CONFRONT, HMAnimations.ELYSIA_ORIGIN_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.ONE_HAND, LivingMotions.CHASE, HMAnimations.ELYSIA_ORIGIN_WALK)
                     .comboCancel((style) -> false);
 
 
