@@ -2,6 +2,7 @@ package com.p1nero.hm.epicfight.animation;
 
 import com.p1nero.hm.EpicFightHM;
 import com.p1nero.hm.entity.RainCutterSwordEntity;
+import com.p1nero.hm.entity.patch.BigFishFishArmature;
 import com.p1nero.hm.epicfight.weapon.HMColliders;
 import net.mcreator.hm.init.HmModItems;
 import net.minecraft.server.level.ServerLevel;
@@ -20,8 +21,9 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 
-@Mod.EventBusSubscriber(modid = EpicFightHM.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HMAnimations {
+    public static StaticAnimation FISH_FLY;
+    public static StaticAnimation FISH_IDLE;
     public static StaticAnimation IDLE1;
     public static StaticAnimation IDLE2;
     public static StaticAnimation IDLE3;
@@ -43,8 +45,6 @@ public class HMAnimations {
     public static StaticAnimation ELYSIA_ORIGIN_AUTO3;
     public static StaticAnimation ELYSIA_ORIGIN_AUTO4;
 
-
-    @SubscribeEvent
     public static void registerAnimations(AnimationRegistryEvent event) {
         event.getRegistryMap().put(EpicFightHM.MOD_ID, HMAnimations::build);
     }
@@ -85,6 +85,12 @@ public class HMAnimations {
     });
 
     private static void build() {
+
+        BigFishFishArmature fishArmature = com.p1nero.hm.gameassets.Armatures.bigFishFishArmature;
+        FISH_FLY = new ActionAnimation(0.15F, "fish_fly", fishArmature);
+//        FISH_IDLE = new StaticAnimation(true, "fish_idle", fishArmature);
+        FISH_IDLE = new StaticAnimation(true, "idle_test", fishArmature);
+
         HumanoidArmature biped = Armatures.BIPED;
 
         IDLE1 = new StaticAnimation(false, "biped/zwzj/idle1", biped)
